@@ -17,6 +17,7 @@ const Posts = () => {
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
+    staleTime: 2000,
   });
 
   return (

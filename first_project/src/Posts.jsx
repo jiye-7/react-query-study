@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useQuery } from '@tanstack/react-query';
 import PostDetail from './PostDetail';
 
 const fetchPosts = async () => {
@@ -13,7 +13,12 @@ const Posts = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const data = [];
+  const { data } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+  });
+
+  if (!data) return <div>글이 없습니다.</div>;
 
   return (
     <>
@@ -22,7 +27,7 @@ const Posts = () => {
           <li
             key={post.id}
             className='post-title'
-            onClick={setSelectedPost(post)}
+            onClick={() => setSelectedPost(post)}
           >
             {post.title}
           </li>

@@ -13,15 +13,21 @@ const Posts = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const { data } = useQuery({
+  // 기본값으로 3번 시도(횟수는 변경 가능)
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
   });
 
-  if (!data) return <div>글이 없습니다.</div>;
-
   return (
     <>
+      {isLoading && <h2>Loading... :)</h2>}
+      {isError && (
+        <>
+          <h2>something wrong..</h2>
+          <p>{error.toString()}</p>
+        </>
+      )}
       <ul>
         {data?.map((post) => (
           <li

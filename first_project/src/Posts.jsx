@@ -24,7 +24,7 @@ const Posts = () => {
       {isLoading && <h2>Loading... :)</h2>}
       {isError && (
         <>
-          <h2>something wrong..</h2>
+          <h2>something wrong..</h2>/query/v4/docs/react/devtools
           <p>{error.toString()}</p>
         </>
       )}

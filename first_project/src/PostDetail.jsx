@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 /**
  * issue: 각 게시글에 달린 댓글로 새로고침 되지 않는 이유 -> useQuery를 구현하는 방식의 결함때문
@@ -40,6 +40,17 @@ const PostDetail = ({ post }) => {
     staleTime: 2000,
   });
 
+  /**
+   * delete 버튼 클릭 시
+   * 객체를 반환하는 deleteMutation과 속성 함수인 mutate를 실행하여 props에서 받은 postId가 무엇이든 상관없이 실행하게 된다.
+   */
+  const deleteMutation = useMutation({
+    // queryKey x: queryKey와 관련있는 cache 내부의 데이터와는 상관 없기 때문에 생략
+    // useQuery에 인수로서 전달하는 queryFn과는 달리 인수로 전달하는 mutationFn의 경우 그 자체를 인수로 받을 수 있다.
+    // useMutation에서 객체는 mutation 함수를 반환하게 된다.
+    mutationFn: (postId) => deletePost(postId),
+  });
+
   return (
     <>
       {isLoading && <h2>Loading...</h2>}
@@ -50,7 +61,17 @@ const PostDetail = ({ post }) => {
         </>
       )}
       <h3 style={{ color: 'skyblue' }}>Title: {post.title}</h3>
-      <button>Delete</button> <button>Update title</button>
+      <button onClick={() => deleteMutation.mutate(post.id)}>Delete</button>
+      {deleteMutation.isError && (
+        <span style={{ color: 'red' }}>Error deleting the post...</span>
+      )}
+      {deleteMutation.isLoading && (
+        <span style={{ color: 'purple' }}>Deleting the post...</span>
+      )}
+      {deleteMutation.isSuccess && (
+        <span style={{ color: 'green' }}>Post has (not) been deleted...</span>
+      )}
+      <button>Update title</button>
       <p>content: {post.body}</p>
       <h4>Comments</h4>
       {data?.map((comment) => (

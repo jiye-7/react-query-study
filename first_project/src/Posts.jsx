@@ -44,8 +44,6 @@ const Posts = () => {
     keepPreviousData: true,
   });
 
-  console.log(data);
-
   return (
     <>
       {isLoading && <h2>Loading... :)</h2>}

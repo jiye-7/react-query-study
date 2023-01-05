@@ -1,3 +1,15 @@
-.App {
-  text-align: center;
+ul {
+  width: 300px;
+  list-style: none;
+  border-bottom: solid 1px red;
+}
+
+ul > li:nth-child(2) {
+  margin: 0px 0px 20px;
+}
+
+.loading {
+  position: fixed;
+  top: 200px;
+  right: 200px;
 }

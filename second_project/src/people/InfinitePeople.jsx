@@ -20,11 +20,14 @@ const InfinitePeople = () => {
     useInfiniteQuery({
       queryKey: ['sw-people'],
       queryFn: fetchUrl,
-      getNextPageParam: (lastPage) => lastPage.next || undefined,
+      getNextPageParam: (lastPage) => lastPage.data.next || undefined,
     });
 
+  if (isLoading) <div className='loading'>Loading...</div>;
+  if (isError) <div>Error! error Message: {error.toString()}</div>;
+
   return (
-    <InfiniteScroll loadMore={fetchNextPage} hasMore={hasNextPage}>
+    <InfiniteScroll loadMore={() => fetchNextPage()} hasMore={hasNextPage}>
       {isLoading && <div className='loading'>Loading...</div>}
       {isError && <div>Error! error Message: {error.toString()}</div>}
       {data?.pages?.map((pageData) =>

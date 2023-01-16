@@ -14,10 +14,10 @@ interface UseCustomToast {
 }
 
 // a wrapper around Chakra UI's useToast that has my default options applied
-export function useCustomToast(): UseCustomToast {
+export const useCustomToast = (): UseCustomToast => {
   return useToast({
     isClosable: true,
     variant: 'subtle',
     position: 'bottom',
   });
-}
+};

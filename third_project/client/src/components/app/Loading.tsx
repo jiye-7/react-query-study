@@ -4,8 +4,8 @@ import { ReactElement } from 'react';
 
 const Loading = (): ReactElement => {
   const isFetching = useIsFetching();
-
   const display = isFetching ? 'inherit' : 'none';
+
   return (
     <Spinner
       thickness="4px"

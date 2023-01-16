@@ -4,7 +4,7 @@ import { GiFlowerPot } from 'react-icons/gi';
 
 import { BackgroundImage } from '../common/BackgroundImage';
 
-export function Home(): ReactElement {
+const Home = (): ReactElement => {
   return (
     <Stack textAlign="center" justify="center" height="84vh">
       <BackgroundImage />
@@ -16,4 +16,6 @@ export function Home(): ReactElement {
       <Text>Address: nearby</Text>
     </Stack>
   );
-}
+};
+
+export default Home;

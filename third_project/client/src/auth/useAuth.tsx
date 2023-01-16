@@ -5,6 +5,12 @@ import { axiosInstance } from '../axiosInstance';
 import { useCustomToast } from '../components/app/hooks/useCustomToast';
 import { useUser } from '../components/user/hooks/useUser';
 
+/**
+ * 사용자 인증 요청을 보내는 함수들 정리
+ * - signin: 로그인
+ * - signup: 회원가입
+ * - signot: 로그아웃
+ */
 interface UseAuth {
   signin: (email: string, password: string) => Promise<void>;
   signup: (email: string, password: string) => Promise<void>;

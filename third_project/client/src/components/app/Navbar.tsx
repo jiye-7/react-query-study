@@ -25,7 +25,7 @@ const NavLink = ({ to, children }: { to: string; children: ReactNode }) => (
   </Link>
 );
 
-export function Navbar(): ReactElement {
+const Navbar = (): ReactElement => {
   const { user } = useUser();
   const { signout } = useAuth();
   const history = useHistory();
@@ -58,4 +58,6 @@ export function Navbar(): ReactElement {
       </Flex>
     </Box>
   );
-}
+};
+
+export default Navbar;
